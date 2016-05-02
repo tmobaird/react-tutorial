@@ -35,6 +35,14 @@ server.mount_proc '/api/comments' do |req, res|
       JSON.pretty_generate(comments, indent: '    '),
       encoding: 'UTF-8'
     )
+  elsif req.request_method == "DELETE"
+    id = blah
+    comments.delete(id)
+    File.write(
+      './comments.json',
+      JSON.pretty_generate(comments, indent: '    '),
+      encoding: 'UTF-8'
+    )
   end
 
   # always return json
