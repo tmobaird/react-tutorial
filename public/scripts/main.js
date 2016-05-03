@@ -1,18 +1,22 @@
+//COMMENT CLASS
 var Comment = React.createClass({
   getInitialState: function() {
     return {author: '', text: ''};
   },
 	render: function() {
-		var text = this.state.liked ? 'like' : 'haven\'t liked';
 		return (
 			<div className="comment col-md-12">
 					<h4 className="commentAuthor">{this.props.author}</h4>
-					{this.props.children}
+          <p>{this.props.children}</p>
 			</div>
 		);
 	}
 });
 
+
+
+
+//COMMENT LIST CLASS
 var CommentList = React.createClass({
 	getInitialState: function() {
     return (<h4>No comments yet!</h4>);
@@ -20,13 +24,22 @@ var CommentList = React.createClass({
   handleDelete: function(e) {
     this.props.deleteComment(e);
   },
+  handleLike: function(e) {
+    this.props.likeComment(e)
+  },
 	render: function() {
     return (
     	<div>
         {this.props.data.map((comment, commentIndex) => 
           <div className="comment col-md-12">
           	<div className="comment col-md-8">
-              <Comment author={comment.author} key={comment.key} >{comment.text}</Comment>
+              <Comment author={comment.author} key={comment.key}>{comment.text}</Comment>
+              <small>
+                <button className="btn btn-default btn-sm glyphicon glyphicon-thumbs-up" onClick={this.handleLike} value={commentIndex}>
+                </button> {comment.likes}
+                <button className="btn btn-default btn-sm glyphicon glyphicon-thumbs-down" onClick={this.handleDislike} value={commentIndex}>
+                </button> {comment.dislikes}
+            </small>
             </div>
             <div className="comment col-md-4">
               <button className="btn btn-large" onClick={this.handleDelete} value={commentIndex}> Delete </button>
@@ -38,6 +51,10 @@ var CommentList = React.createClass({
 	}
 });
 
+
+
+
+//COMMENT FORM CLASS
 var CommentForm =  React.createClass({
 	getInitialState: function() {
     return {author: '', text: ''};
@@ -55,8 +72,8 @@ var CommentForm =  React.createClass({
     if (!text || !author) {
       return;
     }
-    this.props.onCommentSubmit({author: author, text: text});
-    this.setState({author: '', text: ''});
+    this.props.onCommentSubmit({author: author, text: text, likes: 0, dislikes: 0});
+    this.setState({author: '', text: '', likes: 0, dislikes: 0});
   },
 	render: function() {
 		return (
@@ -81,6 +98,9 @@ var CommentForm =  React.createClass({
 	}
 });
 
+
+
+//COMMENT BOX CLASS
 var CommentBox = React.createClass({
 	loadCommentsFromServer: function() {
 	    $.ajax({
@@ -138,6 +158,18 @@ var CommentBox = React.createClass({
       }.bind(this)
     });
   },
+  likeComment: function(comment) {
+    var comments = this.state.data;
+    var commentIndex = parseInt(comment.target.value, 10);
+    var commentToLike = this.state.data[commentIndex];
+    console.log(commentIndex);
+    console.log('liking comment: %d', commentIndex, commentToLike);
+    var initial = parseInt(this.state.data[commentIndex]["likes"], 10);
+    this.setState(state => { 
+      state.data[commentIndex]["likes"] = initial + 1;
+      return {data: state.data}
+    });
+  },
 	getInitialState: function() {
     	return {data: []};
   	},
@@ -149,7 +181,7 @@ var CommentBox = React.createClass({
 		return (
 			<div className="commentBox">
 				<h1>Comments</h1>
-				<div className="commentList"><CommentList data={this.state.data} deleteComment={this.deleteComment} /></div>
+				<div className="commentList"><CommentList data={this.state.data} deleteComment={this.deleteComment} likeComment={this.likeComment} /></div>
 				<div className="commentForm">
 					<h2>Add a Comment!</h2>
 					<CommentForm onCommentSubmit={this.handleCommentSubmit} />

@@ -2,6 +2,36 @@
     {
         "id": 1462240252767,
         "author": "Fez",
-        "text": "Stop it guys, we are friends"
+        "text": "Stop it guys, we are friends",
+        "likes": 0,
+        "dislikes": 0
+    },
+    {
+        "id": 1462284834090,
+        "author": "Happy Capy",
+        "text": "Sup peeps",
+        "likes": 0,
+        "dislikes": 0
+    },
+    {
+        "id": 1462285127974,
+        "author": "Hey",
+        "text": "you",
+        "likes": 0,
+        "dislikes": 0
+    },
+    {
+        "id": 1462285197583,
+        "author": "Capy",
+        "text": "bara",
+        "likes": "0",
+        "dislikes": "0"
+    },
+    {
+        "id": 1462288191228,
+        "author": "Anthony Rizzo",
+        "text": "Go Cubs!",
+        "likes": "0",
+        "dislikes": "0"
     }
 ]
