@@ -24,14 +24,14 @@ var CommentList = React.createClass({
     return (
     	<div>
         {this.props.data.map((comment, commentIndex) => 
-            <div className="comment col-md-12">
-            	<div className="comment col-md-8">
-                <Comment author={comment.author} key={comment.key} >{comment.text}</Comment>
-              </div>
-              <div className="comment col-md-4">
-                <button onClick={this.handleDelete} value={commentIndex}> Delete </button>
-              </div>
+          <div className="comment col-md-12">
+          	<div className="comment col-md-8">
+              <Comment author={comment.author} key={comment.key} >{comment.text}</Comment>
             </div>
+            <div className="comment col-md-4">
+              <button className="btn btn-large" onClick={this.handleDelete} value={commentIndex}> Delete </button>
+            </div>
+          </div>
         )}
     	</div>
     );			
@@ -62,18 +62,20 @@ var CommentForm =  React.createClass({
 		return (
 			<form className="commentForm" onSubmit={this.handleSubmit}>
         <input
+        	className="form-input"
           type="text"
           placeholder="Your name"
           value={this.state.author}
           onChange={this.handleAuthorChange}
         />
         <input
+        	className="form-input"
           type="text"
           placeholder="Say something..."
           value={this.state.text}
           onChange={this.handleTextChange}
         />
-		    <input type="submit" value="Post" />
+		    <input className="btn btn-large" type="submit" value="Post" />
 		  </form>
 		);
 	}
@@ -116,7 +118,25 @@ var CommentBox = React.createClass({
     });
   },
   deleteComment: function(comment) {
-		console.log("Delete!!!!!!");
+  	var comments = this.state.data;
+  	var commentIndex = parseInt(comment.target.value, 10);
+  	var commentToDelete = this.state.data[commentIndex];
+  	console.log('remove task: %d', commentIndex, commentToDelete);
+  	this.setState(state => { 
+  		state.data.splice(commentIndex, 1);
+  		return {data: state.data}
+  	});
+  	$.ajax({
+      url: this.props.url + "?_=" + commentIndex,
+      type: 'DELETE',
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+      	this.setState({data: comments});
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   },
 	getInitialState: function() {
     	return {data: []};

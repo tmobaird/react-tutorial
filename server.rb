@@ -11,6 +11,17 @@
 require 'webrick'
 require 'json'
 
+module WEBrick
+  module HTTPServlet
+
+    class ProcHandler < AbstractServlet
+      alias do_PUT    do_GET
+      alias do_DELETE do_GET
+    end
+
+  end
+end
+
 # default port to 3000 or overwrite with PORT variable by running
 # $ PORT=3001 ruby server.rb
 port = ENV['PORT'] ? ENV['PORT'].to_i : 3000
@@ -22,7 +33,6 @@ server = WEBrick::HTTPServer.new Port: port, DocumentRoot: root
 
 server.mount_proc '/api/comments' do |req, res|
   comments = JSON.parse(File.read('./comments.json', encoding: 'UTF-8'))
-
   if req.request_method == 'POST'
     # Assume it's well formed
     comment = { id: (Time.now.to_f * 1000).to_i }
@@ -36,8 +46,14 @@ server.mount_proc '/api/comments' do |req, res|
       encoding: 'UTF-8'
     )
   elsif req.request_method == "DELETE"
-    id = blah
-    comments.delete(id)
+    req.query.each do |key, value|
+      puts "KEY: #{key}"
+      puts "VALUE: #{value}"
+      #comment[key] = value.force_encoding('UTF-8') unless key == 'id'
+    end
+    url = req.request_uri.to_s
+    id = url.split("?_=").last.to_i
+    comments.delete_at(id)
     File.write(
       './comments.json',
       JSON.pretty_generate(comments, indent: '    '),
