@@ -61,6 +61,10 @@ ul {
   padding-left: 30px;
 }
 
-.commentList {
-  display: block;
+.delete-button {
+  padding-top: 15px;
+}
+
+#comment-row {
+  padding: 5px;
 }

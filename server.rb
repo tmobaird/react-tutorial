@@ -59,6 +59,20 @@ server.mount_proc '/api/comments' do |req, res|
       JSON.pretty_generate(comments, indent: '    '),
       encoding: 'UTF-8'
     )
+  elsif req.request_method == "PUT"
+    url = req.request_uri.to_s
+    id = url.split("?_=").last.to_i
+    comment = {}
+    req.query.each do |key, value|
+      comment[key] = value.force_encoding('UTF-8') unless key == 'id'
+    end
+    comments[id]["likes"] = comment["likes"]
+    comments[id]["dislikes"] = comment["dislikes"]
+    File.write(
+      './comments.json',
+      JSON.pretty_generate(comments, indent: '    '),
+      encoding: 'UTF-8'
+    )
   end
 
   # always return json

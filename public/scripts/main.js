@@ -5,7 +5,7 @@ var Comment = React.createClass({
   },
 	render: function() {
 		return (
-			<div className="comment col-md-12">
+			<div className="comment">
 					<h4 className="commentAuthor">{this.props.author}</h4>
           <p>{this.props.children}</p>
 			</div>
@@ -25,24 +25,28 @@ var CommentList = React.createClass({
     this.props.deleteComment(e);
   },
   handleLike: function(e) {
-    this.props.likeComment(e)
+    this.props.likeComment(e);
+  },
+  handleDislike: function(e) {
+    this.props.dislikeComment(e);
   },
 	render: function() {
     return (
     	<div>
         {this.props.data.map((comment, commentIndex) => 
-          <div className="comment col-md-12">
+          <div className="row comment" id="comment-row">
           	<div className="comment col-md-8">
               <Comment author={comment.author} key={comment.key}>{comment.text}</Comment>
               <small>
-                <button className="btn btn-default btn-sm glyphicon glyphicon-thumbs-up" onClick={this.handleLike} value={commentIndex}>
-                </button> {comment.likes}
-                <button className="btn btn-default btn-sm glyphicon glyphicon-thumbs-down" onClick={this.handleDislike} value={commentIndex}>
-                </button> {comment.dislikes}
-            </small>
+                <button className="btn btn-info btn-sm glyphicon glyphicon-thumbs-up" onClick={this.handleLike} value={commentIndex}>
+                </button> {comment.likes} Likes 
+                <button className="btn btn-info btn-sm glyphicon glyphicon-thumbs-down" onClick={this.handleDislike} value={commentIndex}>
+                </button> {comment.dislikes} Dislikes
+              </small>
             </div>
-            <div className="comment col-md-4">
-              <button className="btn btn-large" onClick={this.handleDelete} value={commentIndex}> Delete </button>
+            <div className="delete-button btn-group comment col-md-4">
+              <button className="btn btn-secondary btn-success" onClick={this.handleDelete} value={commentIndex}> Edit </button>
+              <button className="btn btn-secondary btn-danger" onClick={this.handleDelete} value={commentIndex}> Delete </button>
             </div>
           </div>
         )}
@@ -77,23 +81,25 @@ var CommentForm =  React.createClass({
   },
 	render: function() {
 		return (
+    <div className="col-md-4">
 			<form className="commentForm" onSubmit={this.handleSubmit}>
         <input
-        	className="form-input"
+        	className="form-control"
           type="text"
           placeholder="Your name"
           value={this.state.author}
           onChange={this.handleAuthorChange}
         />
         <input
-        	className="form-input"
+        	className="form-control"
           type="text"
           placeholder="Say something..."
           value={this.state.text}
           onChange={this.handleTextChange}
         />
-		    <input className="btn btn-large" type="submit" value="Post" />
+		    <input className="btn btn-large btn-primary" type="submit" value="Post" />
 		  </form>
+    </div>
 		);
 	}
 });
@@ -162,12 +168,51 @@ var CommentBox = React.createClass({
     var comments = this.state.data;
     var commentIndex = parseInt(comment.target.value, 10);
     var commentToLike = this.state.data[commentIndex];
+    commentToLike["likes"]++
     console.log(commentIndex);
     console.log('liking comment: %d', commentIndex, commentToLike);
     var initial = parseInt(this.state.data[commentIndex]["likes"], 10);
     this.setState(state => { 
       state.data[commentIndex]["likes"] = initial + 1;
       return {data: state.data}
+    });
+    $.ajax({
+      url: this.props.url + "?_=" + commentIndex,
+      dataType: 'json',
+      type: 'PUT',
+      data: this.state.data[commentIndex],
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({data: comments});
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  dislikeComment: function(comment) {
+    var commentIndex = parseInt(comment.target.value, 10);
+    var commentToDislike = this.state.data[commentIndex];
+    commentToDislike["dislikes"]++
+    console.log(commentIndex);
+    console.log('disliking comment: %d', commentIndex, commentToDislike);
+    var initial = parseInt(this.state.data[commentIndex]["dislikes"], 10);
+    this.setState(state => { 
+      state.data[commentIndex]["dislikes"] = initial + 1;
+      return {data: state.data}
+    });
+    $.ajax({
+      url: this.props.url + "?_=" + commentIndex,
+      dataType: 'json',
+      type: 'PUT',
+      data: this.state.data[commentIndex],
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({data: comments});
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
     });
   },
 	getInitialState: function() {
@@ -180,9 +225,9 @@ var CommentBox = React.createClass({
 	render: function() {
 		return (
 			<div className="commentBox">
-				<h1>Comments</h1>
-				<div className="commentList"><CommentList data={this.state.data} deleteComment={this.deleteComment} likeComment={this.likeComment} /></div>
-				<div className="commentForm">
+				<h1>Comments 🐳</h1>
+				<div className="row commentList"><CommentList data={this.state.data} deleteComment={this.deleteComment} likeComment={this.likeComment} dislikeComment={this.dislikeComment} /></div>
+        <div className="row commentForm">
 					<h2>Add a Comment!</h2>
 					<CommentForm onCommentSubmit={this.handleCommentSubmit} />
 				</div>
