@@ -3,7 +3,7 @@
         "id": 1462284834090,
         "author": "Happy Capy",
         "text": "Sup peeps",
-        "likes": "5",
+        "likes": "6",
         "dislikes": "2",
         "reactions": [
 
@@ -13,10 +13,24 @@
         "id": 1462295067668,
         "author": "Fez",
         "text": "Stop it guys, we are friends",
-        "likes": 0,
-        "dislikes": 0,
+        "likes": "4",
+        "dislikes": "0",
         "reactions": [
-
+            {
+                "id": 1462295067669,
+                "author": "Kelso",
+                "text": "He he, boobs"
+            },
+            {
+                "id": 1462295067670,
+                "author": "Hyde",
+                "text": "SHUTUP KELSO"
+            },
+            {
+                "id": 1462295067671,
+                "author": "Jackie",
+                "text": "I love you hyde. You're the greatest, awesomeest, best person I know. The way you took the rap for me when I had the weed was amazing. I think about it and love you even more now. I love you hyde! Do you love me? Do you? Do you?"
+            }
         ]
     },
     {
@@ -26,7 +40,11 @@
         "likes": "17",
         "dislikes": "0",
         "reactions": [
-
+            {
+                "id": 1462295076230,
+                "author": "JToews",
+                "text": "Save Him #SaveShaw"
+            }
         ]
     },
     {
@@ -50,16 +68,6 @@
         ]
     },
     {
-        "id": 1462327573882,
-        "author": "Hyde",
-        "text": "Good one Kelso ;)",
-        "likes": "5",
-        "dislikes": "0",
-        "reactions": [
-
-        ]
-    },
-    {
         "id": 1462327606270,
         "author": "Developer",
         "text": "Soon you will be able to add REACTions to comments so you won't have to reply indirectly to people",
@@ -70,10 +78,10 @@
         ]
     },
     {
-        "id": 1462327773896,
-        "author": "Test array",
-        "text": "lets test it",
-        "likes": "0",
+        "id": 1462381973734,
+        "author": "Tmo",
+        "text": "Yo!",
+        "likes": "1",
         "dislikes": "0",
         "reactions": [
 

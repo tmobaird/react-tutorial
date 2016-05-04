@@ -4,7 +4,12 @@ var Reaction = React.createClass({
     return {author: '', text: ''};
   },
   render: function() {
-
+    return (
+      <div>
+        <h5 className="reactionAuthor">{this.props.author}</h5>
+        <p>{this.props.children}</p>
+      </div>
+    );
   }
 });
 
@@ -17,7 +22,23 @@ var ReactionList = React.createClass({
     return (<h4>No REACTions yet!</h4>);
   },
   render: function() {
-    
+    return (
+      <div>
+        {this.props.data.length > 0 ? <h4>REACTions</h4> : null}
+        {this.props.data.map((reaction, reactionIndex) =>
+          <div className="row"> 
+              <div className="panel panel-default">
+                <div className="col-md-10">
+                  <Reaction author={reaction.author}>{reaction.text}</Reaction>
+                </div>
+                <div className="delete-button btn-group comment col-md-2">
+                  <button className="btn btn-sm btn-danger" onClick={this.handleDelete} value={reactionIndex}> Delete </button>
+                </div>
+              </div>
+          </div>
+        )}
+      </div>
+    );
   }
 });
 
@@ -58,20 +79,33 @@ var CommentList = React.createClass({
 	render: function() {
     return (
     	<div>
-        {this.props.data.map((comment, commentIndex) => 
-          <div className="row comment" id="comment-row">
-          	<div className="comment col-md-8">
-              <Comment author={comment.author} key={comment.key}>{comment.text}</Comment>
-              <small>
-                <button className="btn btn-info btn-sm glyphicon glyphicon-thumbs-up" onClick={this.handleLike} value={commentIndex}>
-                </button> {comment.likes} Likes 
-                <button className="btn btn-info btn-sm glyphicon glyphicon-thumbs-down" onClick={this.handleDislike} value={commentIndex}>
-                </button> {comment.dislikes} Dislikes
-              </small>
+        {this.props.data.map((comment, commentIndex) =>
+          <div className="row"> 
+            <div className="row comment" id="comment-row">
+            <div className="comment col-md-1">
             </div>
-            <div className="delete-button btn-group comment col-md-4">
-              <button className="btn btn-secondary btn-success" onClick={this.handleDelete} value={commentIndex}> Edit </button>
-              <button className="btn btn-secondary btn-danger" onClick={this.handleDelete} value={commentIndex}> Delete </button>
+            	<div className="comment col-md-8">
+                <Comment author={comment.author} key={comment.key} reactions={comment.reactions}>{comment.text}</Comment>
+                <small>
+                  <button className="btn btn-info btn-sm glyphicon glyphicon-thumbs-up" onClick={this.handleLike} value={commentIndex}>
+                  </button> {comment.likes} Likes 
+                  <button className="btn btn-info btn-sm glyphicon glyphicon-thumbs-down" onClick={this.handleDislike} value={commentIndex}>
+                  </button> {comment.dislikes} Dislikes
+                </small>
+              </div>
+              <div className="delete-button btn-group comment col-md-3">
+                <button className="btn btn-secondary btn-success" onClick={this.handleDelete} value={commentIndex}> Edit </button>
+                <button className="btn btn-secondary btn-danger" onClick={this.handleDelete} value={commentIndex}> Delete </button>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-2">
+              </div>
+              <div className="col-md-5">
+                <ReactionList data={comment.reactions} />
+              </div>
+              <div className="col-md-5">
+              </div>
             </div>
           </div>
         )}
