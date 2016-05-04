@@ -4,34 +4,79 @@
         "author": "Happy Capy",
         "text": "Sup peeps",
         "likes": "5",
-        "dislikes": "2"
+        "dislikes": "2",
+        "reactions": [
+
+        ]
     },
     {
         "id": 1462295067668,
         "author": "Fez",
         "text": "Stop it guys, we are friends",
         "likes": 0,
-        "dislikes": 0
+        "dislikes": 0,
+        "reactions": [
+
+        ]
     },
     {
         "id": 1462295076229,
         "author": "Jake Caraway",
         "text": "Save Shaw!!!!",
         "likes": "17",
-        "dislikes": "0"
+        "dislikes": "0",
+        "reactions": [
+
+        ]
     },
     {
         "id": 1462295079351,
         "author": "Anthony Rizzo",
         "text": "Go Cubs!",
         "likes": "5",
-        "dislikes": "0"
+        "dislikes": "0",
+        "reactions": [
+
+        ]
     },
     {
-        "id": 1462297667117,
-        "author": "Thomas",
-        "text": "Yooooooooo",
+        "id": 1462327555951,
+        "author": "Kelso",
+        "text": "Shut up Fez!",
+        "likes": "2",
+        "dislikes": "0",
+        "reactions": [
+
+        ]
+    },
+    {
+        "id": 1462327573882,
+        "author": "Hyde",
+        "text": "Good one Kelso ;)",
+        "likes": "5",
+        "dislikes": "0",
+        "reactions": [
+
+        ]
+    },
+    {
+        "id": 1462327606270,
+        "author": "Developer",
+        "text": "Soon you will be able to add REACTions to comments so you won't have to reply indirectly to people",
         "likes": "0",
-        "dislikes": "1"
+        "dislikes": "0",
+        "reactions": [
+
+        ]
+    },
+    {
+        "id": 1462327773896,
+        "author": "Test array",
+        "text": "lets test it",
+        "likes": "0",
+        "dislikes": "0",
+        "reactions": [
+
+        ]
     }
 ]

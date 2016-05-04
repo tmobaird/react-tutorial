@@ -39,6 +39,7 @@ server.mount_proc '/api/comments' do |req, res|
     req.query.each do |key, value|
       comment[key] = value.force_encoding('UTF-8') unless key == 'id'
     end
+    comment["reactions"] = []
     comments << comment
     File.write(
       './comments.json',

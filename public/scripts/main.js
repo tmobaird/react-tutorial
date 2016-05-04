@@ -1,3 +1,28 @@
+//REACTION CLASS
+var Reaction = React.createClass({
+  getInitialState: function() {
+    return {author: '', text: ''};
+  },
+  render: function() {
+
+  }
+});
+
+
+
+
+//REACTIONLIST CLASS
+var ReactionList = React.createClass({
+  getInitialState: function() {
+    return (<h4>No REACTions yet!</h4>);
+  },
+  render: function() {
+    
+  }
+});
+
+
+
 //COMMENT CLASS
 var Comment = React.createClass({
   getInitialState: function() {
