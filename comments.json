@@ -1,8 +1,8 @@
 [
     {
-        "id": 1462284834090,
-        "author": "Happy Capy",
-        "text": "Sup peeps",
+        "id": 1462295067668,
+        "author": "Fez",
+        "text": "Stop it guys, we are friends",
         "likes": "6",
         "dislikes": "2",
         "reactions": [
@@ -10,38 +10,14 @@
         ]
     },
     {
-        "id": 1462295067668,
-        "author": "Fez",
-        "text": "Stop it guys, we are friends",
-        "likes": "4",
-        "dislikes": "0",
-        "reactions": [
-            {
-                "id": 1462295067669,
-                "author": "Kelso",
-                "text": "He he, boobs"
-            },
-            {
-                "id": 1462295067670,
-                "author": "Hyde",
-                "text": "SHUTUP KELSO"
-            },
-            {
-                "id": 1462295067671,
-                "author": "Jackie",
-                "text": "I love you hyde. You're the greatest, awesomeest, best person I know. The way you took the rap for me when I had the weed was amazing. I think about it and love you even more now. I love you hyde! Do you love me? Do you? Do you?"
-            }
-        ]
-    },
-    {
         "id": 1462295076229,
         "author": "Jake Caraway",
         "text": "Save Shaw!!!!",
-        "likes": "17",
+        "likes": "20",
         "dislikes": "0",
         "reactions": [
             {
-                "id": 1462295076230,
+                "id": "1462295076230",
                 "author": "JToews",
                 "text": "Save Him #SaveShaw"
             }
@@ -62,26 +38,16 @@
         "author": "Kelso",
         "text": "Shut up Fez!",
         "likes": "2",
-        "dislikes": "0",
+        "dislikes": "2",
         "reactions": [
 
         ]
     },
     {
-        "id": 1462327606270,
-        "author": "Developer",
-        "text": "Soon you will be able to add REACTions to comments so you won't have to reply indirectly to people",
-        "likes": "0",
-        "dislikes": "0",
-        "reactions": [
-
-        ]
-    },
-    {
-        "id": 1462381973734,
-        "author": "Tmo",
-        "text": "Yo!",
-        "likes": "1",
+        "id": 1462850462255,
+        "author": "Jake",
+        "text": "You aint go no friends fam",
+        "likes": "4",
         "dislikes": "0",
         "reactions": [
 

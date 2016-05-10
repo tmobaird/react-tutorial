@@ -69,6 +69,25 @@ server.mount_proc '/api/comments' do |req, res|
     end
     comments[id]["likes"] = comment["likes"]
     comments[id]["dislikes"] = comment["dislikes"]
+    reactions = []
+    comment.each do |key, value|
+      if key.include? "reactions"
+        num = key.scan(/\[\d*\]/).first
+        num = num.delete "[" "]"
+        attribute = key.scan(/\[\D*\]/).first
+        attribute = attribute.delete "[" "]"
+        reaction = reactions[num.to_i]
+        unless reaction == nil
+          reactions[num.to_i] = reaction.merge({"#{attribute}" => value})
+        else
+          reactions[num.to_i] = {"#{attribute}" => value}
+        end
+      end
+    end
+    puts "Comment being updated: #{comment}"
+    puts "Reactions for Comment: #{reactions}"
+    
+    comments[id]["reactions"] = reactions
     File.write(
       './comments.json',
       JSON.pretty_generate(comments, indent: '    '),
