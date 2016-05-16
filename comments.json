@@ -6,14 +6,21 @@
         "likes": "6",
         "dislikes": "2",
         "reactions": [
-
+            {
+                "author": "Kelso",
+                "text": "Boobs"
+            },
+            {
+                "author": "Jackie",
+                "text": "I Love you Kelso!!!!"
+            }
         ]
     },
     {
         "id": 1462295076229,
         "author": "Jake Caraway",
         "text": "Save Shaw!!!!",
-        "likes": "20",
+        "likes": "21",
         "dislikes": "0",
         "reactions": [
             {
@@ -50,7 +57,10 @@
         "likes": "4",
         "dislikes": "0",
         "reactions": [
-
+            {
+                "author": "Rob",
+                "text": "Shut up Foo!"
+            }
         ]
     }
 ]
